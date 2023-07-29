@@ -1,0 +1,21 @@
+# Based on https://github.com/hedgedoc/hedgedoc/blob/c2854957a2b4c74dacc664cb0f497b6f50b55d1e/docs/content/setup/docker.md
+
+services:
+  hedgedoc:
+    image: quay.io/hedgedoc/hedgedoc:1.9.8
+    restart: always
+    depends_on:
+      - database
+    volumes:
+      - ./volumes/hedgedoc_uploads:/hedgedoc/public/uploads
+    environment:
+      - CMD_DB_URL=postgres://hedgedoc:password@database:5432/hedgedoc
+      - CMD_DOMAIN=${HEDGEDOC_CMD_DOMAIN:?}
+
+  database:
+    image: postgres:15
+    restart: always
+    environment:
+      - POSTGRES_USER=hedgedoc
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=hedgedoc
