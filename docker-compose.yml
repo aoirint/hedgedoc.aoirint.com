@@ -12,6 +12,7 @@ services:
       - CMD_DB_URL=postgres://hedgedoc:password@database:5432/hedgedoc
       - CMD_DOMAIN=${HEDGEDOC_CMD_DOMAIN:?}
       - CMD_PROTOCOL_USESSL=${HEDGEDOC_CMD_PROTOCOL_USESSL:?}
+      - CMD_URL_ADDPORT=${HEDGEDOC_CMD_URL_ADDPORT:?}
 
   database:
     image: postgres:15
